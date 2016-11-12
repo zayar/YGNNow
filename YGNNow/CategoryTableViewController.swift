@@ -19,13 +19,13 @@ class CategoryTableViewController: UITableViewController {
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         ref = FIRDatabase.database().reference()
-        ref.child("Categories").queryOrdered(byChild: "Category").observe(.childAdded, with: { (snapshot) in
-            
+        //ref.child("Categories").queryOrdered(byChild: "Category").observe(.childAdded, with: { (snapshot) in
+             ref.child("Categories").queryOrdered(byChild: "Id").observe(.childAdded, with: { (snapshot) in
             var categoryName : String?
             var categoryImage : String?
             
-            categoryName = (snapshot.value as? NSDictionary)? ["Category"] as? String
-            categoryImage = (snapshot.value as? NSDictionary)? ["CategoryImage"] as? String
+            categoryName = (snapshot.value as? NSDictionary)? ["Name"] as? String
+            categoryImage = (snapshot.value as? NSDictionary)? ["Image"] as? String
             
             let modelInstance = Category(categoryName: categoryName, categoryImage: categoryImage)
             self.categoryArray.append(modelInstance)
